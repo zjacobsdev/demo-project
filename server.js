@@ -1,4 +1,5 @@
 var sensor = require('node-dht-sensor');
+//<socket.io> Client
  
 setInterval(getTemp,500)
 
@@ -14,3 +15,14 @@ console.log(`temp: ${temperature}°C, humidity: ${humidity}%`)
 }
 });
 }
+/*
+ <socket.io> //sends live temp data to server
+ *  
+	 -->endpt= "http:somewebsitedomain.com/device_connect"
+
+*/
+
+
+
+
+
