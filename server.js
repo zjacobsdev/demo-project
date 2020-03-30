@@ -1,6 +1,6 @@
-var sensor = require("node-dht-sensor");
+var sensor = require('node-dht-sensor');
  
-setInterval(getTemp,1000)
+setInterval(getTemp,500)
 
 function getTemp(){
 sensor.read(11, 4, function(err, temperature, humidity) {
@@ -8,6 +8,9 @@ sensor.read(11, 4, function(err, temperature, humidity) {
 	  
 console.log(`temp: ${temperature}°C, humidity: ${humidity}%`)
     
-  }
+  }else{
+	  
+  console.log('Error: can not get data') 
+}
 });
 }

@@ -29,6 +29,8 @@ This is a web application displaying real time data of the tempurture and humidi
 
 - [Raspbian Installation](https://www.raspberrypi.org/documentation/installation/installing-images/)
 
+- [Raspberry Pi Setup with Node.js,Express,and MongoDB](https://www.instructables.com/id/How-to-Build-a-Website-on-a-Raspberry-Pi-With-Node/)
+
 - [DHT11 data sheet](https://components101.com/dht11-temperature-sensor)
 
 - [NodeSource](https://nodesource.com/)
