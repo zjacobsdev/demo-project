@@ -1,0 +1,26 @@
+*{
+  box-sizing: border-box;
+  /* border: 1px solid blue; */
+}
+html{
+  font-size: 10px;
+}
+body{
+  padding-top:80px;
+  word-wrap:break-word;
+}li{
+  margin-bottom: 30px;
+}
+/* .dataSpan {
+  border: 1px solid black;
+  padding: 10px 2% 10px 2%
+} */
+.label{
+  width: 40%;
+}
+.col-sm-6{
+  width: 100%;
+}
+li span {
+  margin-left: 12.5%;
+}
