@@ -1,7 +1,7 @@
 # demo-project:Plant Genesis
 This project demonstrates the skills I gain during Resilient Coders 2020A bootcamp. 
 
-This is a web application displaying real time data of the tempurture and humidity. 
+This is a web application displaying real time data of the temperature and humidity of a DHT11 sensor. 
 
 
 # How It's Made
@@ -15,7 +15,7 @@ This is a web application displaying real time data of the tempurture and humidi
 
 # Updates
 
-- **3/29/2020:** Was able to install node.js, and the dhtll senor libary on RPI and read the sensors values and onthe console. Also drafted out how the website, database, and device will connect to one another.
+- **3/29/2020:** Was able to install Node.js, and the DTHTll sensor package on the RPI3 and read the sensors values and on the console. Also drafted out how the website, database, and device will connect to one another.
 
 ## References
 
