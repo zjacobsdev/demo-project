@@ -1,79 +1,60 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>21 Savage Fan Site</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="style_standin.css">
+    <title>Home</title>
 </head>
 <body>
-<div class="container">
-
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> <%= user.local.email%>'s' Launch Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
-
-    <!-- <div class="row">
-
-        LOCAL INFORMATION
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
-                <% if (user.local.email) { %>
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
-
-                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                <% } else { %>
-                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                <% } %>
-
-            </div>
-        </div> -->
-        <div class="col-sm-6">
-          <h3>Upcoming Bills</h3>
-          
-              <span class="label">Company</span> 
-              <span class="label">Due Date</span>
-              <span class="label">Payment Amount</span>
-          
+    <section class="container1">
+        <i class="material-icons">person</i>
+        <span>Welcome <span>User</span></span>
+        <h1>Plant Vitals</h1>
+        <button><i class="material-icons">settings</i></button>
+        <button>Log Out</button>
+    </section>
     
-          <ul class="messages">
-          <% for(var i=0; i < data.length; i++) {%>
-           <% if(data[i].name === user.local.email ) {%>
-            <li class="message">
-              <span><%= data[i].company %></span>
-              <span><%= data[i].date %></span>
-              <span><%= data[i].amt %></span>
-              <button class ="paidBtn" type ="button">Paid</button> 
-              <button class ="trashBtn" type ="button">Trash</button> 
+    <a href="/devices"> <button id ="device_btn" type="button">Devices</button></a> 
+    <h2><i class="material-icons">home</i>Home:<span>Living Room</span></h2>
+    <section class="container2">
+        <section class="data-container">
+            <span>Current Tempurture</span>
+            <span >78%</span> 
+            <span>Low</span>
+            <span>______________________________</span>
+            <span>High</span>
+        </section>
+        <section class ="data-container">
+            <span>Current Humidity</span>
+            <span>50%</span>
+            <span>Low</span>
+            <span>______________________________</span>
+            <span>High</span>
+        </section>
+    </section>
+    <section class="container3">
+        <span>Daily Average(7 day)<i class="material-icons">arrow_drop_down_circle</i></span>
+        <% for(var i=0; i < data.length; i++) {%>
+            <li>
+                <% for(var j =0; j < data.length; j++) {%>
+                <span><%= data[i].daily_avg[j] %></span>
+                <% } %>
+        
             </li>
+    
             <% } %>
-          <% } %>
-          </ul>
-
-          <h2>Enter new bills</h2>
-        <% if (user.local.email) { %>
-          <form action="/list" method="POST">
-            <label for="company"></label>
-            <input type="text" placeholder="Company Name" name="company">
-            <label for="date"></label>
-            <input type="text" placeholder="Due Date" name="date">
-            <label for="amt"></label>
-            <input type="text" placeholder="$200"  name ="amt">
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-        <% } %>
-
-</div>
-
-<script src="main.js"></script>
-
+        <span>Monthly Average<i class="material-icons">arrow_drop_down_circle</i></span>
+        <% for(var i=0; i < data.length; i++) {%>
+            <li>
+                <% for(var j =0; j < data.length; j++) {%>
+                    <span><%= data[i].daily_avg[j] %></span>
+                    <% } %>
+            </li>
+    
+            <% } %>
+    </section>
+    
 </body>
 </html>

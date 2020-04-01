@@ -4,75 +4,60 @@ module.exports = function(app, passport, db) {
       // show the Home Page
   app.get('/', function(req, res) {
       res.render('index.ejs');
-      });
-      //get homepage when user login ---> gets temp and humidity
-  app.get('/homepage', isLoggedIn, function(req, res) {
-    if(req.user.local.email){
-      db.collection('device_temp').find().toArray((err, result) => {
-        if (err) return console.log(err)
-        
-        //<socket.io> ---> live temp/hum data stream ????????
-        
-        
-      /*  res.render('home.ejs', { //currently index.html
-          user: req.user,
-          data: result
-        })*/
+  });
+
+      //get homepage when user login ---> gets temp and hum
+  app.get('/profile', isLoggedIn, function(req, res) {
+    db.collection('device_temp').find().toArray((err, result) => {
+
+      if (err) return console.log(err)
+      
+      //<socket.io> ---> live temp/hum data stream ????????
+      res.render('profile.ejs', { //currently index.html
+        //user: req.user,
+        data: result
       })
-    }
+     
+    })
   });
 
       //get device manager page
   app.get('/devices', isLoggedIn, function(req, res) {
-  if(req.user.local.email){
-      db.collection('device_temp').find().toArray((err, result) => {
+    db.collection('device_temp').find().toArray((err, result) => {
       if (err) return console.log(err)
-
-    //<socket.io> live device status 
       
-    /*  res.render('home.ejs', { //currently index.html
-            user: req.user,
-            data: result
-          })*/
+      //<socket.io> ---> live temp/hum data stream ????????
+      res.render('devices.ejs', { //currently index.html
+        //user: req.user,
+        data: result
       })
-  }
-  });
+     
+  })
+  })
 
   //add new device id and device_name from form
   app.post('/devices', (req, res) => {   
-    if(req.user.local.email){
-    db.collection('device_temp').save({device_id:req.body.device_id, device_name:req.body.device_name }, (err, result) => {
+    db.collection('device_temp').save({usr:req.user.local.email, device_id:req.body.device_id, device_name:req.body.device_name, daily_avg: [], weekly_avg: [] , monthly_avg:[] }, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
+      res.redirect('/devices');
     })
-  }
+
   })
 
   // deletes devices
-  app.delete('/devices', (req, res) => {
-      
-    if(req.user.local.email){
-        db.collection('device_temp').findOneAndDelete({ device_id:req.body.device_id }, (err, result) => {
+  app.delete('/devices', (req, res) => {   
+    console.log(req.body.device_id)
+        db.collection('device_temp').findOneAndDelete({ device_id: req.body.device_id }, (err, result) => {
           if (err) return res.send(500, err)
-          res.send('Message deleted!')
+          console.log('Message deleted!')
+          res.redirect('/devices');
         })
-        }
-      })
+   
+   })
   //change device name
   app.put('/devices', (req, res) => {  
-    if(req.user.local.email){
-    
-    // user input checking ---> req.body.name_change
-    
-  db.collection('device_temp').findOneAndUpdate({device_id:req.body.device_id }, (err, result) => {
-      $set{
-      device_name: req.body.name_change     
-          
-      }
-    if (err) return console.log(err)
-    console.log('saved to database')
-  })
-  }
+ 
   })
 
   // show the login form
@@ -110,7 +95,6 @@ module.exports = function(app, passport, db) {
       });
   });
 
-  };
 
   // route middleware to ensure user is logged in
   function isLoggedIn(req, res, next) {
@@ -118,4 +102,5 @@ module.exports = function(app, passport, db) {
           return next();
 
       res.redirect('/');
+}
 }
