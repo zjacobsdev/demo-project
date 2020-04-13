@@ -1,22 +1,42 @@
-module.exports = function(app, passport, db) {
+module.exports = function(app, passport, db, socket, io) {
 
 
       // show the Home Page
   app.get('/', function(req, res) {
-      res.render('index.ejs');
+       res.render('index.ejs');
   });
 
       //get homepage when user login ---> gets temp and hum
   app.get('/profile', isLoggedIn, function(req, res) {
+  
     db.collection('device_temp').find().toArray((err, result) => {
-
       if (err) return console.log(err)
+
+      io.sockets.on ('connection', newConnection)
+      
+      function newConnection(socket){
+        
+        console.log('new connection'+ socket.id)
+      
+        socket.on('dht', msg)
+
+        function msg(data){
+        
+        res.render('profile.ejs', { //currently index.html
+          //user: req.user,
+          data: result,
+          dht: data
+       })
+      }
+    }
+
+
       
       //<socket.io> ---> live temp/hum data stream ????????
-      res.render('profile.ejs', { //currently index.html
-        //user: req.user,
-        data: result
-      })
+      // res.render('profile.ejs', { //currently index.html
+      //   //user: req.user,
+      //   data: result
+      // })
      
     })
   });

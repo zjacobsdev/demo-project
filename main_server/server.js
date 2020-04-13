@@ -9,6 +9,8 @@ const MongoClient = require('mongodb').MongoClient
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
+var socket = require('socket.io');
+
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -19,11 +21,18 @@ var configDB = require('./config/database.js');
 
 var db
 
+
+var server = app.listen(port);
+
+console.log('The magic happens on port ' + port); 
+
+var io = socket(server)
+
 // configuration ===============================================================
 mongoose.connect(configDB.url, (err, database) => {
   if (err) return console.log(err)
   db = database
-  require('./app/routes.js')(app, passport, db);
+  require('./app/routes.js')(app, passport, db, socket, io);
 }); // connect to our database
 
 //app.listen(port, () => {
@@ -59,9 +68,6 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 
-// routes ======================================================================
-//require('./app/routes.js')(app, passport, db); // load our routes and pass in our app and fully configured passport
 
-// launch ======================================================================
-app.listen(port);
-console.log('The magic happens on port ' + port);
+
+
