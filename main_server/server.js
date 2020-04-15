@@ -9,7 +9,7 @@ const MongoClient = require('mongodb').MongoClient
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
-var socket = require('socket.io');
+//var socket = require('socket.io');
 
 
 var morgan       = require('morgan');
@@ -22,17 +22,21 @@ var configDB = require('./config/database.js');
 var db
 
 
-var server = app.listen(port);
+//var server = app.listen(port);
+var server = require('http').createServer(app)
+var io = require ('socket.io')(server)
+
+server.listen(port);
 
 console.log('The magic happens on port ' + port); 
 
-var io = socket(server)
+//var io = socket(server)
 
 // configuration ===============================================================
 mongoose.connect(configDB.url, (err, database) => {
   if (err) return console.log(err)
   db = database
-  require('./app/routes.js')(app, passport, db, socket, io);
+  require('./app/routes.js')(app, passport, db, io);
 }); // connect to our database
 
 //app.listen(port, () => {

@@ -21,14 +21,14 @@
     <section class="container2">
         <section class="data-container">
             <span>Current Tempurture</span>
-            <span><%= dht.temp %></span> 
+            <span id ="temp"> N/A</span> 
             <span>Low</span>
             <span>______________________________</span>
             <span>High</span>
         </section>
         <section class ="data-container">
             <span>Current Humidity</span>
-            <span><%= dht.hum %></span>
+            <span id ="hum">N/A</span>
             <span>Low</span>
             <span>______________________________</span>
             <span>High</span>
@@ -55,6 +55,7 @@
     
             <% } %>
     </section>
-    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

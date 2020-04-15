@@ -14,6 +14,8 @@ Array.from(trash).forEach(function(element) {
                 device_id: device_id
               })
             })
+            window.location.reload(true)
+
       })
 
     
@@ -24,21 +26,4 @@ socket.on('connect', function(){
   console.log(socket)
 });
 
-socket.on('dhtpage', function (data) {
-  //console.log("Rendering data : ", data);
 
-  var temp = document.querySelector("#temp");
-  var hum = document.querySelector("#hum");
-
-  temp.textContent= data.temp
-     hum.textContent = data.hum
-    
-
-    // for(var i = 0; i < data.length; i++){
-
-    //     var newData = data[i];
-
-    //     temp.textContent= newData.temp
-    //     hum.textContent = newData.hum
-    // }
-  })

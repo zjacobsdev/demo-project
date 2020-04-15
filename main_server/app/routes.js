@@ -1,4 +1,4 @@
-module.exports = function(app, passport, db, socket, io) {
+module.exports = function(app, passport, db, io) {
 
 
       // show the Home Page
@@ -8,37 +8,72 @@ module.exports = function(app, passport, db, socket, io) {
 
       //get homepage when user login ---> gets temp and hum
   app.get('/profile', isLoggedIn, function(req, res) {
+
+        io.sockets.on ('connection', newConnection)
+
+        function newConnection(socket){
+
+             console.log('new connection'+ socket.id)
+            
+              socket.on('dht', function (data){
+               // console.log(data)
+                io.emit('dhtpage', data)
+              } )
+                 
+
+        }
+      db.collection('device_temp').find().toArray((err, result) => {
+        if (err) return console.log(err)
+
+              
+        
+            res.render('profile.ejs', { //currently index.html
+              data: result,
+             
+            
+            })
+
+      })
+
+
+
+
+
+
+
+
+
   
-    db.collection('device_temp').find().toArray((err, result) => {
-      if (err) return console.log(err)
+    // db.collection('device_temp').find().toArray((err, result) => {
+    //   if (err) return console.log(err)
 
-      io.sockets.on ('connection', newConnection)
+    //   io.sockets.on ('connection', newConnection)
       
-      function newConnection(socket){
+    //   function newConnection(socket){
         
-        console.log('new connection'+ socket.id)
+    //     console.log('new connection'+ socket.id)
       
-        socket.on('dht', msg)
+    //     socket.on('dht', msg)
 
-        function msg(data){
+    //     function msg(data){
         
-        res.render('profile.ejs', { //currently index.html
-          //user: req.user,
-          data: result,
-          dht: data
-       })
-      }
-    }
+    //     res.render('profile.ejs', { //currently index.html
+    //       //user: req.user,
+    //       data: result,
+    //       dht: data
+    //    })
+    //   }
+    // }
 
 
       
-      //<socket.io> ---> live temp/hum data stream ????????
-      // res.render('profile.ejs', { //currently index.html
-      //   //user: req.user,
-      //   data: result
-      // })
+    //   //<socket.io> ---> live temp/hum data stream ????????
+    //   // res.render('profile.ejs', { //currently index.html
+    //   //   //user: req.user,
+    //   //   data: result
+    //   // })
      
-    })
+    // })
   });
 
       //get device manager page
