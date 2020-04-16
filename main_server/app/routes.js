@@ -1,9 +1,9 @@
 module.exports = function(app, passport, db, io) {
-
+ var timer = null
 
       // show the Home Page
   app.get('/', function(req, res) {
-       res.render('index.ejs');
+       res.render('index.ejs')
   });
 
       //get homepage when user login ---> gets temp and hum
@@ -18,9 +18,9 @@ module.exports = function(app, passport, db, io) {
               socket.on('dht', function (data){
                // console.log(data)
                 io.emit('dhtpage', data)
+               timer = setInterval (function() {snapshotData(data)}, 10000)
               } )
                  
-
         }
       db.collection('device_temp').find().toArray((err, result) => {
         if (err) return console.log(err)
@@ -34,54 +34,13 @@ module.exports = function(app, passport, db, io) {
             })
 
       })
-
-
-
-
-
-
-
-
-
-  
-    // db.collection('device_temp').find().toArray((err, result) => {
-    //   if (err) return console.log(err)
-
-    //   io.sockets.on ('connection', newConnection)
-      
-    //   function newConnection(socket){
-        
-    //     console.log('new connection'+ socket.id)
-      
-    //     socket.on('dht', msg)
-
-    //     function msg(data){
-        
-    //     res.render('profile.ejs', { //currently index.html
-    //       //user: req.user,
-    //       data: result,
-    //       dht: data
-    //    })
-    //   }
-    // }
-
-
-      
-    //   //<socket.io> ---> live temp/hum data stream ????????
-    //   // res.render('profile.ejs', { //currently index.html
-    //   //   //user: req.user,
-    //   //   data: result
-    //   // })
-     
-    // })
   });
 
       //get device manager page
   app.get('/devices', isLoggedIn, function(req, res) {
     db.collection('device_temp').find().toArray((err, result) => {
       if (err) return console.log(err)
-      
-      //<socket.io> ---> live temp/hum data stream ????????
+    
       res.render('devices.ejs', { //currently index.html
         //user: req.user,
         data: result
@@ -95,7 +54,7 @@ module.exports = function(app, passport, db, io) {
     db.collection('device_temp').save({usr:req.user.local.email, device_id:req.body.device_id, device_name:req.body.device_name, daily_avg: [], weekly_avg: [] , monthly_avg:[] }, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
-      res.redirect('/devices');
+      res.redirect('/devices')
     })
 
   })
@@ -106,7 +65,7 @@ module.exports = function(app, passport, db, io) {
         db.collection('device_temp').findOneAndDelete({ device_id: req.body.device_id }, (err, result) => {
           if (err) return res.send(500, err)
           console.log('Message deleted!')
-          res.redirect('/devices');
+          res.redirect('/devices')
         })
    
    })
@@ -117,7 +76,7 @@ module.exports = function(app, passport, db, io) {
 
   // show the login form
   app.get('/login', function(req, res) {
-      res.render('login.ejs', { message: req.flash('loginMessage') });
+      res.render('login.ejs', { message: req.flash('loginMessage') })
   });
 
   // process the login form
@@ -129,7 +88,7 @@ module.exports = function(app, passport, db, io) {
 
   // show the signup form
   app.get('/signup', function(req, res) {
-      res.render('signup.ejs', { message: req.flash('signupMessage') });
+      res.render('signup.ejs', { message: req.flash('signupMessage') })
   });
 
   // process the signup form
@@ -142,11 +101,11 @@ module.exports = function(app, passport, db, io) {
 
     // unlink local account 
   app.get('/unlink/local', isLoggedIn, function(req, res) {
-      var user            = req.user;
-      user.local.email    = undefined;
-      user.local.password = undefined;
+      var user            = req.user
+      user.local.email    = undefined
+      user.local.password = undefined
       user.save(function(err) {
-          res.redirect('/profile');
+          res.redirect('/profile')
       });
   });
 
@@ -154,8 +113,35 @@ module.exports = function(app, passport, db, io) {
   // route middleware to ensure user is logged in
   function isLoggedIn(req, res, next) {
       if (req.isAuthenticated())
-          return next();
+          return next()
 
-      res.redirect('/');
+      res.redirect('/')
 }
+
+
+
+//////put in seperate file //////////
+
+function snapshotData(data){
+
+  console.log("saving to database")
+  console.log(data.device_id)
+  console.log(data.temp)
+
+
+  db.collection('device_temp').updateOne(
+    
+    {device_id: data.device_id},
+
+    { $push: { daily_avg: data.temp } },
+    
+    function (err, result) {
+    if (err) return console.log(err)
+
+  })
+
+  clearInterval(timer);
+
+}
+
 }
