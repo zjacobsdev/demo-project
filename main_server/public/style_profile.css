@@ -3,7 +3,7 @@
 
 }
 html{
-    /* font-size: 10px; */
+    font-size: 10px;
 }
 h1{
     display: inline;
@@ -50,7 +50,7 @@ button{
     color: red;
     text-align: center;
     padding-top: 60px;
-    font-size: 100px;
+    font-size: 80px;
 }
 .data-container span:nth-child(n+3){
     display: inline;
@@ -67,7 +67,21 @@ button{
     clear: both;
     border-top: 2px solid black;
 }
-.container3 span{
+/* .container3 span{
     display: block;
     border-bottom: 2px solid black;
+} */
+
+.tile li{
+    display: inline;
+    /* float: left; */
+    font-size: 5rem
+
 }
+.tile li span{
+    border: 1px solid black;
+}
+.hide{
+    display: none;
+}
+

@@ -8,6 +8,7 @@ html{
 body{
   padding-top:80px;
   word-wrap:break-word;
+  background-image: url(img/logo_bg.jpg);
 }li{
   margin-bottom: 30px;
 }
@@ -23,4 +24,21 @@ body{
 }
 li span {
   margin-left: 12.5%;
+}
+img{
+  height: 100px;
+  width: 100px;
+
+
+}
+.jumbotron{
+
+  background-color: #74C0CA;
+
+
+
+}
+.container .jumbotron {
+  border: 2px solid #718E03;
+  border-radius: 20px;
 }

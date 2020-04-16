@@ -1,5 +1,5 @@
 module.exports = function(app, passport, db, io) {
- var timer = null
+ //var timer = null
 
       // show the Home Page
   app.get('/', function(req, res) {
@@ -9,17 +9,19 @@ module.exports = function(app, passport, db, io) {
       //get homepage when user login ---> gets temp and hum
   app.get('/profile', isLoggedIn, function(req, res) {
 
+
         io.sockets.on ('connection', newConnection)
 
         function newConnection(socket){
 
-             console.log('new connection'+ socket.id)
+             //console.log('new connection'+ socket.id)
             
               socket.on('dht', function (data){
                // console.log(data)
                 io.emit('dhtpage', data)
-               timer = setInterval (function() {snapshotData(data)}, 10000)
+               setInterval (function() {snapshotData(data)}, 10000)
               } )
+           
                  
         }
       db.collection('device_temp').find().toArray((err, result) => {
@@ -28,6 +30,7 @@ module.exports = function(app, passport, db, io) {
               
         
             res.render('profile.ejs', { //currently index.html
+              user: req.user,
               data: result,
              
             
@@ -140,8 +143,10 @@ function snapshotData(data){
 
   })
 
-  clearInterval(timer);
+  //clearInterval(timer);
 
 }
+
+
 
 }
