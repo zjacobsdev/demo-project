@@ -43,17 +43,25 @@ setInterval(() =>{
 
 //connect to socket
 socket.on('connect', function(){
+    if(socket.connect){
   console.log("Client connected")
   console.log(socket)
+}
 });
 
 // Recieve Temperature and Humidity from sensor.
 socket.on('dhtpage', function (data) {
+
+    if (socket.connected){
+
   var temp = document.querySelector("#temp");
   var hum = document.querySelector("#hum");
 
   temp.textContent= data.temp 
-  hum.textContent = data.hum  
+  hum.textContent = data.hum 
+}else{
+    //nothing
+}
      
 
   })

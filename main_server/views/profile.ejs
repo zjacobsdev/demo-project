@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">   
+   <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative|Frijole&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="style_profile.css">
+
+
     <title>Home</title>
 </head>
 <body>
     <section class="container1">
         <i class="material-icons">person</i>
         <span>Welcome <span>User</span></span>
-        <h1>Plant Vitals</h1>
+        <h1>Plant Genesis</h1>
         <!-- <button><i class="material-icons">settings</i></button> -->
        <a href="/unlink/local"><button>Log Out</button></a> 
     </section>
@@ -21,20 +25,20 @@
     <h2><i class="material-icons">home</i>Home:<span>  <%= data[2].device_name %></span></h2>
     <section class="container2">
         <section class="data-container">
-            <span>Current Tempurture</span>
+            <span>Temperature</span>
             <span id ="temp">N/A</span> 
-            <span>&deg; F</span>
-            <span>Low</span>
+            <span class="dataLabels">&deg; F</span>
+            <!-- <span>Low</span>
             <span>______________________________</span>
-            <span>High</span>
+            <span>High</span> -->
         </section>
         <section class ="data-container">
-            <span>Current Humidity</span>
+            <span>Humidity</span>
             <span id ="hum">N/A</span>
-            <span>%</span>
-            <span>Low</span>
+            <span class="dataLabels">%</span>
+            <!-- <span>Low</span>
             <span>______________________________</span>
-            <span>High</span>
+            <span>High</span> -->
         </section>
     </section>
     <section class="container3">

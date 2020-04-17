@@ -11,6 +11,8 @@ module.exports = function(app, passport, db, io) {
 
 
         io.sockets.on ('connection', newConnection)
+        io.sockets.setMaxListeners(0)
+        
 
         function newConnection(socket){
 

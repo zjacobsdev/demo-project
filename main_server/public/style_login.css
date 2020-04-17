@@ -1,0 +1,46 @@
+*{
+  box-sizing: border-box;
+  /* border: 1px solid blue; */
+}
+html{
+  font-size: 10px;
+}
+body{
+  padding-top:80px;
+  word-wrap:break-word;
+  background-image: url(img/logo_bg.jpg);
+}
+.jumbotron h1{
+  
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 3rem;
+  color:rgb(101,67,33);
+
+}
+
+h2{
+  font-size: 2rem;
+  color: rgb(101,67,33)
+}
+
+.btn-warning {
+
+  font-family: 'Cinzel Decorative', cursive;
+  color: #fff;
+  background-color:rgb(101,67,33);
+  border-color: rgb(113, 142, 3);
+}
+
+
+
+
+.jumbotron{
+
+  background-color: rgb(116, 192, 202);
+  border: 2px solid rgb(113, 142, 3);
+  border-radius: 20px;
+
+}
+.container .jumbotron {
+  border-radius: 20px;
+}
