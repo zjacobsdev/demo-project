@@ -1,5 +1,5 @@
 module.exports = function(app, passport, db, io) {
- //var timer = null
+ var timer = null
 
       // show the Home Page
   app.get('/', function(req, res) {
@@ -14,15 +14,13 @@ module.exports = function(app, passport, db, io) {
 
         function newConnection(socket){
 
-             //console.log('new connection'+ socket.id)
+            console.log('new connection'+ socket.id)
             
               socket.on('dht', function (data){
                // console.log(data)
                 io.emit('dhtpage', data)
-               setInterval (function() {snapshotData(data)}, 10000)
-              } )
-           
-                 
+          
+              })                
         }
       db.collection('device_temp').find().toArray((err, result) => {
         if (err) return console.log(err)
@@ -54,7 +52,7 @@ module.exports = function(app, passport, db, io) {
 
   //add new device id and device_name from form
   app.post('/devices', (req, res) => {   
-    db.collection('device_temp').save({usr:req.user.local.email, device_id:req.body.device_id, device_name:req.body.device_name, daily_avg: [], weekly_avg: [] , monthly_avg:[] }, (err, result) => {
+    db.collection('device_temp').save({usr:req.user.local.email, device_id:req.body.device_id, device_name:req.body.device_name, data_collection: [], daily_avg: [], weekly_avg: [] , monthly_avg:[] }, (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
       res.redirect('/devices')
@@ -72,8 +70,22 @@ module.exports = function(app, passport, db, io) {
         })
    
    })
-  //change device name
-  app.put('/devices', (req, res) => {  
+  //snapshot current data on Dom
+  app.put('/snapshot', (req, res) => {  
+
+    console.log("saving to database")
+
+    db.collection('device_temp').updateOne(
+      
+      {device_id: req.body.device_id},
+  
+      { $push: {data_collection: req.body.temp} },
+      
+      function (err, result) {
+      if (err) return console.log(err)
+  
+    })
+  
  
   })
 
@@ -120,33 +132,6 @@ module.exports = function(app, passport, db, io) {
 
       res.redirect('/')
 }
-
-
-
-//////put in seperate file //////////
-
-function snapshotData(data){
-
-  console.log("saving to database")
-  console.log(data.device_id)
-  console.log(data.temp)
-
-
-  db.collection('device_temp').updateOne(
-    
-    {device_id: data.device_id},
-
-    { $push: { daily_avg: data.temp } },
-    
-    function (err, result) {
-    if (err) return console.log(err)
-
-  })
-
-  //clearInterval(timer);
-
-}
-
 
 
 }

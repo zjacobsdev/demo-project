@@ -17,11 +17,13 @@
     </section>
     
     <a href="/devices"> <button id ="device_btn" type="button">Devices</button></a> 
-    <h2><i class="material-icons">home</i>Home:<span>Living Room</span></h2>
+    <span class ="getId hide"><%= data[2].device_id %></span>
+    <h2><i class="material-icons">home</i>Home:<span>  <%= data[2].device_name %></span></h2>
     <section class="container2">
         <section class="data-container">
             <span>Current Tempurture</span>
-            <span id ="temp"> N/A</span> 
+            <span id ="temp">N/A</span> 
+            <span>&deg; F</span>
             <span>Low</span>
             <span>______________________________</span>
             <span>High</span>
@@ -29,6 +31,7 @@
         <section class ="data-container">
             <span>Current Humidity</span>
             <span id ="hum">N/A</span>
+            <span>%</span>
             <span>Low</span>
             <span>______________________________</span>
             <span>High</span>
@@ -36,7 +39,7 @@
     </section>
     <section class="container3">
         <span>Daily Average(7 day)<i class="material-icons">arrow_drop_down_circle</i></span>
-        <section class="hide">
+        <section class="hide hideDay">
             <% for(var i=0; i < data.length; i++) {%>
                 <% if (user.local.email && data[i].device_id === '12345'){ %>
 
@@ -52,27 +55,55 @@
   
                 <% } %>
             <% } %>
-            <script>
-                console.log (<% data %>)
-            </script>
-
-
         </section>
         <section>
-            <canvas id="myChart" width="400" height="100"></canvas>
+            <canvas id="dailyChart" width="400" height="100"></canvas>
+        </section>
+        <span>Weekly Average<i class="material-icons">arrow_drop_down_circle</i></span>
+        <section class="hide hideWeekly">
+            <% for(var i=0; i < data.length; i++) {%>
+                <% if (user.local.email && data[i].device_id === '12345'){ %>
+
+                        <span><%= data[i].weekly_avg[0]%></span>
+                        <span><%= data[i].weekly_avg[1]%></span>
+                        <span><%= data[i].weekly_avg[2]%></span>
+                        <span><%= data[i].weekly_avg[3]%></span>
+                        <span><%= data[i].weekly_avg[4]%></span>
+                        <span><%= data[i].weekly_avg[5]%></span>
+                        <span><%= data[i].weekly_avg[6]%></span>
+                        <span><%= data[i].weekly_avg[7]%></span>
+
+                <% } %>
+            <% } %>
+        </section>
+        <section>
+            <canvas id="weeklyChart" width="400" height="100"></canvas>
         </section>
     
         <span>Monthly Average<i class="material-icons">arrow_drop_down_circle</i></span>
-        <ul class = "tile">
-        <% for(var i=0; i < data.length; i++) {%>
-            <li>
-                <% for(var j =0; j < data.length; j++) {%>
-                    <span><%= data[i].daily_avg[j] %></span>
-                    <% } %>
-            </li>
-    
+        <section class="hide hideMonth">
+            <% for(var i=0; i < data.length; i++) {%>
+                <% if (user.local.email && data[i].device_id === '12345'){ %>
+
+                        <span><%= data[i].monthly_avg[0]%></span>
+                        <span><%= data[i].monthly_avg[1]%></span>
+                        <span><%= data[i].monthly_avg[2]%></span>
+                        <span><%= data[i].monthly_avg[3]%></span>
+                        <span><%= data[i].monthly_avg[4]%></span>
+                        <span><%= data[i].monthly_avg[5]%></span>
+                        <span><%= data[i].monthly_avg[6]%></span>
+                        <span><%= data[i].monthly_avg[7]%></span>
+                        <span><%= data[i].monthly_avg[8]%></span>
+                        <span><%= data[i].monthly_avg[9]%></span>
+                        <span><%= data[i].monthly_avg[10]%></span>
+                        <span><%= data[i].monthly_avg[11]%></span>
+
+                <% } %>
             <% } %>
-        </ul>
+        </section>
+        <section>
+            <canvas id="monthlyChart" width="400" height="100"></canvas>
+        </section>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="/socket.io/socket.io.js"></script>

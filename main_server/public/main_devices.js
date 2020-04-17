@@ -1,11 +1,8 @@
 var socket = io.connect('http://192.168.1.153:8180');
 
+const device_status = document.querySelectorAll(".dot")
 
-var status = document.querySelectorAll(".dot")
-console.log(status)
-
-var trash = document.querySelectorAll(".trash-btn")
-console.log(trash)
+const trash = document.querySelectorAll(".trash-btn")
 
 Array.from(trash).forEach(function(element) {
   //console.log(element)
@@ -34,14 +31,19 @@ socket.on('connect', function(){
 
 
 
+//get online status of devices
+  socket.on('dhtpage', function(data){
+    if (socket.connected){   
+
+    Array.from(device_status).forEach(function(e) { 
+      if (data.device_id === e.parentNode.childNodes[3].innerText ){
+
+        e.parentNode.childNodes[5].style.backgroundColor = 'green'
+      }
+    })
+    } 
+  })
 
 
-// Array.from(status).forEach(function(e) {
-
-//     console.log(e)
-//     //if (this.parentNode.childNodes[3].innerText)
-
-    
-
-//     })
+  
 
