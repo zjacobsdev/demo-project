@@ -1,17 +1,24 @@
 *{
     box-sizing: border-box;
+    /* border: 1px solid blue; */
 
 }
 html{
     font-size: 10px;
 }
+body{
+ background-color: rgb(116, 192, 202);
+}
 h1{
-    display: inline;
+    height: 60px;
+    width: 60%;
     font-family: 'Cinzel Decorative', cursive;
-    margin-left: 35%;
+    margin-top: 10px;
+    margin-left: 12%;
+    text-align: center;
     color: rgb(113, 142, 3);
     font-size: 4rem;
-    
+    display: inline-block;
     
 
 }
@@ -19,10 +26,40 @@ h2{
     border-bottom: 2px solid black;
     display: inline-block;
     margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
 }
-button{
+h1 + a{
     float: right;
     margin-right: 2%;
+}
+img{
+    height: 50px;
+    width: 50px;
+    margin-right: 3%;
+    
+  
+  }
+a button{
+    float: right;
+    margin-right: 2%;
+    margin-top: 10px;
+    background-color:rgb(113, 142, 3);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(53, 83, 30);
+    border-radius: 5px;
+    font-size: 1.8rem;
+}
+
+section.container3 span{
+
+    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif;
+
+}
+.material-icons + span{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
 }
 .container1{
     height: 80px;
@@ -46,11 +83,14 @@ button{
 .data-container span{
     display: block;
     border-radius: 50%;
+   
 }
 .data-container span:nth-child(1){
     font-weight: 700;
     text-align: center;
     margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
 }
 .data-container span:nth-child(2){
     height: 200px;
@@ -80,7 +120,7 @@ button{
 
 .container3{
     clear: both;
-    border-top: 2px solid black;
+    margin-top: 20px;
 }
 /* .container3 span{
     display: block;
@@ -101,11 +141,15 @@ button{
 }
 
 .container2{
-    height: 300px;
+    height: 315px;
     width: 100%;
     
     /* background-image: url(img/logo_bg.jpg); */
-    background-color: rgb(0, 166, 191) ;
+    background-color: #0E2465;
+    border-top: 2px solid rgb(2, 90, 104) ;
+    border-bottom: 2px solid rgb(2, 90, 104) ;
+
+    
 
 }
 .dataLabels{
