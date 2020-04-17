@@ -27,6 +27,8 @@ This is a web application displaying real time data of the temperature and humid
 
 - [Socket.io Documentation](https://github.com/socketio/socket.io/tree/master/docs)
 
+- [Chart.js](https://www.chartjs.org/)
+
 - [Raspberry Pi 3 Model B (2015)](https://www.adafruit.com/product/3055)
 
 - [Raspbian Installation](https://www.raspberrypi.org/documentation/installation/installing-images/)
