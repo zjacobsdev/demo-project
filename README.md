@@ -15,6 +15,8 @@ This is a web application displaying real time data of the temperature and humid
 
 # Updates
 
+- **4/17/2020:** Have some basic functionality on the site. There a few bugs that need to be worked through. I still need to figure out how to take a sample of the ongoing data coming from the raspberry pi on the server-side instead of the client. Also added another library, Charts.Js  to display the temperature averages in a more elegant way. 
+
 - **3/29/2020:** Was able to install Node.js, and the DTHTll sensor package on the RPI3 and read the sensors values and on the console. Also drafted out how the website, database, and device will connect to one another.
 
 ## References
@@ -24,6 +26,8 @@ This is a web application displaying real time data of the temperature and humid
 - [Socket.io](https://socket.io/)
 
 - [Socket.io Documentation](https://github.com/socketio/socket.io/tree/master/docs)
+
+- [Chart.js](https://www.chartjs.org/)
 
 - [Raspberry Pi 3 Model B (2015)](https://www.adafruit.com/product/3055)
 
