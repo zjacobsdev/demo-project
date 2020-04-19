@@ -1,5 +1,5 @@
 module.exports = function(app, passport, db, io) {
- var timer = null
+  //var timer = null
 
       // show the Home Page
   app.get('/', function(req, res) {
@@ -12,12 +12,30 @@ module.exports = function(app, passport, db, io) {
 
         io.sockets.on ('connection', newConnection)
         io.sockets.setMaxListeners(0)
+
+      // setInterval(() => {
+      //     console.log("timer starts")
+      //     console.log(  io.sockets.on('dht', function (data){
+            
+            
+          
+      //    })  )
+
+      //   //   io.sockets.on('dht', function (data){
+            
+      //   //     console.log(data)
+          
+      //   //  })                
         
+      //   }, 3000);
+
+        
+        //clearInterval(timer)
 
         function newConnection(socket){
 
             console.log('new connection'+ socket.id)
-            
+      
               socket.on('dht', function (data){
                // console.log(data)
                 io.emit('dhtpage', data)
@@ -134,6 +152,5 @@ module.exports = function(app, passport, db, io) {
 
       res.redirect('/')
 }
-
 
 }
