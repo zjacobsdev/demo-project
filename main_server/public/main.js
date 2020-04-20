@@ -57,7 +57,7 @@ socket.on('dhtpage', function (data) {
   var temp = document.querySelector("#temp");
   var hum = document.querySelector("#hum");
 
-  temp.textContent= data.temp 
+  temp.textContent= (Number(data.temp)*1.8) + 32    /// convert Celius to Fahrenheit *should be done on rpi_client instead 
   hum.textContent = data.hum 
 }else{
     //nothing
