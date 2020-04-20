@@ -168,10 +168,19 @@ setInterval(() => {
 //delete values in data_collection
 
 //db.collection('device_temp').find({ device_id = '12345', }) 
-let arr = []
-arr = db.collection('device_temp').distinct( "data_collection", { device_id: '12345'})
+//let arr = []
+//* arr re
+db.collection('device_temp').distinct( "data_collection", { device_id: "12345"})
 
-console.log(arr)
+        .then(function(arr) {
+          //console.log(arr);   //*Note to self* arr returns array of non repeating values
+
+        let  sum = arr.reduce((total,num)=>{ return (Number(total) + Number(num)) })
+
+        console.log(sum /arr.length)
+
+          //callback(numItems);
+        })
   
-}, 3000); /// 24-hour period 8.64e7
+}, 3000); /// 24-hour period --> 8.64e7
 }
