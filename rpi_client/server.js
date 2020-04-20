@@ -1,11 +1,25 @@
 var sensor = require('node-dht-sensor');
-//<socket.io> Client
- 
-setInterval(getTemp,500)
+var socket = require('socket.io-client')('http://192.168.1.153:8180');
+
+socket.on('connect', function(){
+  console.log("Device Connected")
+  });
+
+
+setInterval(getTemp,1000)
 
 function getTemp(){
 sensor.read(11, 4, function(err, temperature, humidity) {
   if (!err) {
+    
+    var data ={
+      device_id: "12345",
+      temp:temperature,
+      hum: humidity,
+      //led_status = true
+  
+     }
+  socket.emit('dht', data)
 	  
 console.log(`temp: ${temperature}°C, humidity: ${humidity}%`)
     
@@ -15,12 +29,7 @@ console.log(`temp: ${temperature}°C, humidity: ${humidity}%`)
 }
 });
 }
-/*
- <socket.io> //sends live temp data to server
- *  
-	 -->endpt= "http:somewebsitedomain.com/device_connect"
 
-*/
 
 
 
