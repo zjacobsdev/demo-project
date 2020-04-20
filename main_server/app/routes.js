@@ -179,8 +179,19 @@ db.collection('device_temp').distinct( "data_collection", { device_id: "12345"})
 
         console.log(sum /arr.length)
 
-          //callback(numItems);
+        db.collection('device_temp').updateOne(
+      
+          {device_id: '12345'},
+      
+          { $push: {testarr: sum /arr.length} },
+          
+          function (err, result) {
+          if (err) return console.log(err)
+      
+        })
+  
         })
   
 }, 3000); /// 24-hour period --> 8.64e7
+
 }
