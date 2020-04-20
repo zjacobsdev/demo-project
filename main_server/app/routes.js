@@ -90,6 +90,7 @@ module.exports = function(app, passport, db, io) {
         })
    
    })
+
   //snapshot current data on Dom
   app.put('/snapshot', (req, res) => {  
 
@@ -155,10 +156,22 @@ module.exports = function(app, passport, db, io) {
 
 
 
-///// timers ///
+///// timers for data anaylsis ///
 
+
+//////   gets the days data (data_collection) and save to a day_avg   ///////
 setInterval(() => {
-  
-}, 8.64e7); /// 24-hour period
 
+// get db collection (data_collection), get array
+// find the avg of those values 
+//save that value in to (day_avg)
+//delete values in data_collection
+
+//db.collection('device_temp').find({ device_id = '12345', }) 
+let arr = []
+arr = db.collection('device_temp').distinct( "data_collection", { device_id: '12345'})
+
+console.log(arr)
+  
+}, 3000); /// 24-hour period 8.64e7
 }
