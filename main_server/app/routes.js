@@ -180,7 +180,7 @@ db.collection('device_temp').distinct( "data_collection", { device_id: "12345"})
       
           {device_id: '12345'},
       
-          { $push: {testarr: sum /arr.length} },  ///*change to daily avg
+          { $push: {testarr: sum /arr.length} },  ///*change to daily avg instead of testarr
           
           function (err, result) {
           if (err) return console.log(err)
@@ -189,6 +189,6 @@ db.collection('device_temp').distinct( "data_collection", { device_id: "12345"})
   
         })
   
-}, 1111111000); /// 24-hour period --> 8.64e7
+}, 8.64e7); /// 24-hour period --> 8.64e7
 
 }
