@@ -39,7 +39,7 @@ setInterval(() =>{
    console.log("going to database")
     }
 
-}, 3.6e6)
+}, 3.6e6) /// every hour
 
 //connect to socket
 socket.on('connect', function(){

@@ -153,4 +153,12 @@ module.exports = function(app, passport, db, io) {
       res.redirect('/')
 }
 
+
+
+///// timers ///
+
+setInterval(() => {
+  
+}, 8.64e7); /// 24-hour period
+
 }
