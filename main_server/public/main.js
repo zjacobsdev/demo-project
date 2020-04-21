@@ -57,8 +57,12 @@ socket.on('dhtpage', function (data) {
   var temp = document.querySelector("#temp");
   var hum = document.querySelector("#hum");
 
-  temp.textContent= (Number(data.temp)*1.8) + 32    /// convert Celius to Fahrenheit *should be done on rpi_client instead 
-  hum.textContent = data.hum 
+  tempFah =  (Number(data.temp)*1.8) + 32 
+  
+  tempFah.toFixed(1)
+
+  temp.textContent= tempFah.toFixed(1) + '°F' /// convert Celius to Fahrenheit *should be done on rpi_client instead 
+  hum.textContent = data.hum  + '%'
 }else{
     //nothing
 }
@@ -110,10 +114,12 @@ var dailyChart = new Chart(ctx, {
         }
     }
 });
+
+///weekly chart
 var weeklyChart = new Chart(ctx2, {
     type: 'line',
     data: {
-        labels: ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        labels: ['Week 13','Week 14', 'Week 15', 'Week 16', 'Week 17', 'Week 18', 'Week 19'], // *change week dynamiclly
         datasets: [{
             label: 'Weekly Temperature',
             data: [ tempAvgWeekly[1].textContent, 

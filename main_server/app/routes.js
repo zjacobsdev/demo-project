@@ -191,4 +191,61 @@ db.collection('device_temp').distinct( "data_collection", { device_id: "12345"})
   
 }, 8.64e7); /// 24-hour period --> 8.64e7
 
+
+
+////// weekly SnapShot////
+setInterval(() => {
+  
+  db.collection('device_temp').distinct( "day_avg", { device_id: "12345"})
+  
+          .then(function(arr) {
+            //console.log(arr);   //*Note to self* arr returns array of non repeating values
+  
+          let  sum = arr.reduce((total,num)=>{ return (Number(total) + Number(num)) })
+  
+          console.log(sum /arr.length)
+  
+          db.collection('device_temp').updateOne(
+        
+            {device_id: '12345'},
+        
+            { $push: {testarrWeek: sum /arr.length} },  ///*change to weekly_avg instead of testarrWeekly
+            
+            function (err, result) {
+            if (err) return console.log(err)
+        
+          })
+    
+          })
+    
+  }, 8.64e7 * 7); /// 7-day period
+
+
+  /////Monthly SnapShot///
+  setInterval(() => {
+  
+    db.collection('device_temp').distinct( "data_collection", { device_id: "12345"})
+    
+            .then(function(arr) {
+              //console.log(arr);   //*Note to self* arr returns array of non repeating values
+    
+            let  sum = arr.reduce((total,num)=>{ return (Number(total) + Number(num)) })
+    
+            console.log(sum /arr.length)
+    
+            db.collection('device_temp').updateOne(
+          
+              {device_id: '12345'},
+          
+              { $push: {testarrMonthly: sum /arr.length} },  ///*change to monthly_temp instead of testarrMonthly
+              
+              function (err, result) {
+              if (err) return console.log(err)
+          
+            })
+      
+            })
+      
+    }, 8.64e7 * 30); /// 30-day period  -----> Note:* moment.js  would be ideal for scheduling
+
 }
